@@ -31,7 +31,7 @@ jobs:
           distribution: 'zulu'
           java-version: '8'
       - name: Analyze with SonarCloud
-        run: ./mvnw -B verify sonar:sonar -Dsonar.projectKey=mukesh-s -Dsonar.organization=mukesh-s -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=mukesh-s -Dsonar.organization=mukesh-s -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
