@@ -11,3 +11,4 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 /.idea/
 /data-analysis.iml
+/src/test/scala/static.scala
