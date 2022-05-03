@@ -25,10 +25,20 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11'
-      - name: Analyze with SonarCloud
-        run: mvn -B verify sonar:sonar -Dsonar.projectKey=data-analysis -Dsonar.organization=mukesh-s -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#      - name: Analyze with SonarCloud
+#        run: mvn -B verify sonar:sonar -Dsonar.projectKey=data-analysis -Dsonar.organization=mukesh-s -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+
+      - name: Upload to S3
+      - uses: actions/checkout@master
+      - uses: shallwefootball/s3-upload-action@master
+        with:
+            aws_key_id: ${{ secrets.AWS_KEY_ID }}
+            aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+            aws_bucket: ${{ secrets.AWS_BUCKET }}
+            source_dir: 'target/data-analysis-1.0-SNAPSHOT.jar'
+            destination_dir: 'artifacts'
