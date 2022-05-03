@@ -1,6 +1,5 @@
 package org.analysis
 
-import org.apache.spark.sql.functions.col
 import org.init.SparkUtil
 import org.util.CarsUtil
 
