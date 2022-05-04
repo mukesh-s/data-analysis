@@ -19,6 +19,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: data-analysis-snapshot
+      - name: Archive files
+        uses: thedoctor0/zip-release@master
+        with:
+         filename: data-analysis-snapshot.zip
       - name: Create Github Release
         id: create_release
         uses: actions/create-release@v1
