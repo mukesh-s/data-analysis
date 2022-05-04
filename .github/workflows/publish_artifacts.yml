@@ -4,7 +4,7 @@ name: Publish Artifacts
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
+  # Triggers the workflow on push or pull request events but only for the release branch
   push:
     branches: [ release ]
 
@@ -25,7 +25,7 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
       - name: Upload snapshot
-      - uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           name: data-analysis-snapshot
           path: target/data-analysis*.jar
