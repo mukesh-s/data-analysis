@@ -1,26 +1,30 @@
 package org.util
 
-import org.init.SparkUtil
-import org.junit.Test
+import org.analysis.DataAnalyisisApp
+import org.apache.spark.sql.DataFrame
 import org.junit.Assert.assertEquals
+import org.junit.Test
 
 class CarsUtilTest {
+
+  def fixture: Object {val carsDataFrame: DataFrame} =
+    new {
+      val carsDataFrame: DataFrame = DataAnalyisisApp.buildCarsDataFrame
+    }
 
   @Test
   def mostExpensiveCar(): Unit = {
     val expensiveCar = "Mercedes EQS 450+"
-    val dataLocation = "src/main/resources/data/Cheapestelectriccars-EVDatabase.csv"
-    val carsDataFrame = SparkUtil.getLocalSparkSession().read.option("header", "true").csv(dataLocation)
-    val firstCar = CarsUtil.getMostExpensiveCarsInUK(carsDataFrame).first()
+    val fix = fixture
+    val firstCar = CarsUtil.getMostExpensiveCarsInUK(fix.carsDataFrame).first()
     assertEquals(expensiveCar, firstCar.getString(0))
   }
 
   @Test
   def fastestCar(): Unit = {
     val expensiveCar = "Tesla Roadster"
-    val dataLocation = "src/main/resources/data/Cheapestelectriccars-EVDatabase.csv"
-    val carsDataFrame = SparkUtil.getLocalSparkSession().read.option("header", "true").csv(dataLocation)
-    val firstCar = CarsUtil.getFastestCars(carsDataFrame).first()
+    val fix = fixture
+    val firstCar = CarsUtil.getFastestCars(fix.carsDataFrame).first()
     assertEquals(expensiveCar, firstCar.getString(0).trim)
   }
 
