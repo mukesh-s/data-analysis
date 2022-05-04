@@ -15,7 +15,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    name: verify, build and test
+    name: sonar check, build and publish test results
     steps:
       - uses: actions/checkout@v2
         with:
