@@ -16,7 +16,7 @@ jobs:
     needs: build-project
     steps:
       - name: Download artifact
-      - uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v3
         with:
           name: data-analysis-snapshot
       - name: Create Github Release
